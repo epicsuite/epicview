@@ -1,0 +1,61 @@
+#!/usr/bin/env python3.9
+
+import sys
+import pandas
+import argparse
+import epicview
+
+# create help text and handle some command line arguments
+helptext = "\n\
+\n\
+examples: \n\
+\n\
+"
+
+# normal option parsing
+parser = argparse.ArgumentParser( description="a viewer for epic genomic data",
+                                  epilog=helptext,
+                                  formatter_class=argparse.RawDescriptionHelpFormatter )
+
+parser.add_argument( "--version", action="version", version="0.2.0" )
+parser.add_argument( "--path", default=None, required=True )
+parser.add_argument( "--dataroot", default=None )
+parser.add_argument( "--variable", default=None, required=True )
+
+args, remainder = parser.parse_known_args()
+
+structurefile = ""
+if args.dataroot: 
+    structurefile = '/'.join((args.dataroot, args.path))
+else:
+    structurefile = args.path
+
+# reporting
+print("---------------------------")
+print("Epic View application v0.1")
+print("---------------------------")
+
+# -----------------------------------------------------------------------------
+# Trame
+# -----------------------------------------------------------------------------
+
+server = get_server(client_type = "vue2")
+ctrl = server.controller
+
+with SinglePageLayout(server) as layout:
+    layout.title.set_text("EPIC.viewer: " + structurefile)
+
+    with layout.content:
+        with vuetify.VContainer(
+            fluid=True,
+            classes="pa-0 fill-height",
+        ):
+            view = vtk.VtkLocalView(renderWindow)
+
+
+# -----------------------------------------------------------------------------
+# Main
+# -----------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    server.start()
