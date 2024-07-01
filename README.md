@@ -24,16 +24,11 @@ This is a viewer based on the *trame* application framework.
 To set up an environment to run `epic.viewer.py` script:
 
 ```
-# basic trame installation
+# local installation of this module
 python3.9 -m venv .venv
 source ./.venv/bin/activate
 python -m pip install --upgrade pip
-pip install trame                   # Install trame core
-pip install trame-vuetify trame-vtk # Install widgets that we'll be using
-pip install vtk                     # Install the VTK library
-
-# epic-specific installation
-pip install pandas
+pip install .
 ```
 
 ### examples
