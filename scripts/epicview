@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser( description="a viewer for epic genomic data",
                                   epilog=helptext,
                                   formatter_class=argparse.RawDescriptionHelpFormatter )
 
-parser.add_argument( "--version", action="version", version="0.2.0" )
+parser.add_argument( "--version", action="version", version=epicview.__version__ )
 parser.add_argument( "session", nargs='?' )
 parser.add_argument( "--variable", default=None )
 parser.add_argument( "--example", action='store_true', default=False ) 
@@ -44,7 +44,7 @@ else:
 
 # reporting
 print("---------------------------")
-print("Epic View application v0.2.0")
+print("Epic View application v" + epicview.__version__)
 print("  " + structurefile )
 print("  " + variable )
 print("---------------------------")
