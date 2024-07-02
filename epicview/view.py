@@ -38,6 +38,12 @@ from vtkmodules.vtkInteractionStyle import vtkInteractorStyleSwitch  # noqa
 # local rendering, but doesn't hurt to include it
 import vtkmodules.vtkRenderingOpenGL2  # noqa
 
+import pkg_resources
+import os
+
+def getModulePath():
+    return os.path.dirname(pkg_resources.resource_filename(__name__, 'view.py'))
+
 class etkServer:
 
     def __init__(self):

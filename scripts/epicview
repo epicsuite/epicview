@@ -4,6 +4,7 @@ import sys
 import pandas
 import argparse
 import epicview
+import os
 
 # create help text and handle some command line arguments
 helptext = "\n\
@@ -18,21 +19,32 @@ parser = argparse.ArgumentParser( description="a viewer for epic genomic data",
                                   formatter_class=argparse.RawDescriptionHelpFormatter )
 
 parser.add_argument( "--version", action="version", version="0.2.0" )
-parser.add_argument( "--path", default=None, required=True )
+parser.add_argument( "--path", default=None )
 parser.add_argument( "--dataroot", default=None )
-parser.add_argument( "--variable", default=None, required=True )
+parser.add_argument( "--variable", default=None )
+parser.add_argument( "--example", action='store_true', default=False ) 
 
 args, remainder = parser.parse_known_args()
 
 structurefile = ""
+variable = ""
 if args.dataroot: 
     structurefile = '/'.join((args.dataroot, args.path))
+    variable = args.variable
+
+elif args.example:
+    structurefile = os.path.join(epicview.getModulePath(), 'examples', 'hilbert.csv')
+    variable = "increase"
+
 else:
     structurefile = args.path
+    variable = args.variable
 
 # reporting
 print("---------------------------")
 print("Epic View application v0.1")
+print("  " + structurefile )
+print("  " + variable )
 print("---------------------------")
 
 # -----------------------------------------------------------------------------
@@ -42,4 +54,4 @@ print("---------------------------")
 eServer = epicview.etkServer()
 
 if __name__ == "__main__":
-    eServer.start(structurefile, args.variable)
+    eServer.start(structurefile, variable)

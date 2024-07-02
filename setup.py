@@ -19,7 +19,7 @@ setuptools.setup(
     url="https://github.com/epicsuite/epicview",
     include_package_data=True,
     zip_safe=False,
-    packages=[  "epicview" ],
+    packages=[  "epicview", "epicview.examples" ],
     install_requires=[
         "trame",
         "trame-vuetify",
@@ -35,5 +35,6 @@ setuptools.setup(
     scripts=[
         'doc/description.md',
         'scripts/epicview'
-    ]
+    ],
+    data_files=[('epicview/examples', ['epicview/examples/hilbert.csv'])]
 )
