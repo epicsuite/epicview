@@ -10,5 +10,5 @@ Documentation for this module is available at http://epicsuite.readthedocs.io
 python3.9 -m venv .venv
 source ./.venv/bin/activate
 pip install --upgrade pip
-pip install .
+pip install epicview 
 ```
