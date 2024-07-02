@@ -1,6 +1,6 @@
 # EPIC analysis suite viewer tools 
 
-The `epicview` python module (https://github.com/epicsuite/epicview) is a set of tools for reading, writing, manipulating and viewing Cinema databases. 
+The `epicview` python module (https://github.com/epicsuite/epicview) is a set of tools for viewing 3D genomic data. 
 
 Documentation for this module is available at http://epicsuite.readthedocs.io
 
