@@ -1,0 +1,7 @@
+epicview:
+  version: 0.2.0
+
+data:
+  structure:  testing/hilbert/hilbert-2.csv
+  variable:   increase
+  resolution: 200000

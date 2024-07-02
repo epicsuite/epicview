@@ -25,7 +25,8 @@ setuptools.setup(
         "trame-vuetify",
         "trame-vtk",
         "vtk",
-        "pandas"
+        "pandas",
+        "pyyaml"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

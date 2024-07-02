@@ -33,17 +33,25 @@ pip install .
 
 ### examples
 
-If you have an 'EPIC_DATA_ROOT' location:
+Run the application on a session file:
 ```
-python view/epic.view.py \
-    --dataroot /Some/path \
-    --path     products/eda-fduh0l8m/section/chr27/structure/100kb/structure-with-tracks.csv
+epicview session.yaml
 ```
 
-If you just want to open a file with an absolute path: 
+Where a session file is the following:
 ```
-python view/epic.view.py \
-    --path     some/path/to/a/structure-with-tracks.csv
+epicview:
+  version: 0.2.0
+
+data:
+  structure:  testing/hilbert/hilbert-2.csv
+  variable:   increase
+  resolution: 200000
+```
+
+To run the app on a file with an absolute path: 
+```
+epicview some/path/to/a/structure-with-tracks.csv
 ```
 
 ### file format for viewer

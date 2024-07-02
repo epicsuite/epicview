@@ -1,10 +1,9 @@
 #!/usr/bin/env python3.9
 
-import sys
-import pandas
 import argparse
 import epicview
 import os
+import yaml
 
 # create help text and handle some command line arguments
 helptext = "\n\
@@ -19,8 +18,7 @@ parser = argparse.ArgumentParser( description="a viewer for epic genomic data",
                                   formatter_class=argparse.RawDescriptionHelpFormatter )
 
 parser.add_argument( "--version", action="version", version="0.2.0" )
-parser.add_argument( "--path", default=None )
-parser.add_argument( "--dataroot", default=None )
+parser.add_argument( "session" )
 parser.add_argument( "--variable", default=None )
 parser.add_argument( "--example", action='store_true', default=False ) 
 
@@ -28,21 +26,25 @@ args, remainder = parser.parse_known_args()
 
 structurefile = ""
 variable = ""
-if args.dataroot: 
-    structurefile = '/'.join((args.dataroot, args.path))
-    variable = args.variable
 
-elif args.example:
+if args.example:
     structurefile = os.path.join(epicview.getModulePath(), 'examples', 'hilbert.csv')
     variable = "increase"
 
 else:
-    structurefile = args.path
-    variable = args.variable
+    # did the user pass a session file
+    if args.session.endswith(".yaml"):
+        with open(args.session, 'r') as stream:
+            data = yaml.safe_load(stream)
+            structurefile = data["data"]["structure"]
+            variable = data["data"]["variable"]
+    else:
+        structurefile = args.session
+        variable = args.variable
 
 # reporting
 print("---------------------------")
-print("Epic View application v0.1")
+print("Epic View application v0.2.0")
 print("  " + structurefile )
 print("  " + variable )
 print("---------------------------")
