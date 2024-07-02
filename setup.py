@@ -33,6 +33,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     scripts=[
-        'doc/description.md'
+        'doc/description.md',
+        'scripts/epicview'
     ]
 )

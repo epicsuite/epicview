@@ -38,39 +38,55 @@ from vtkmodules.vtkInteractionStyle import vtkInteractorStyleSwitch  # noqa
 # local rendering, but doesn't hurt to include it
 import vtkmodules.vtkRenderingOpenGL2  # noqa
 
-import sys
-import pandas
-import argparse
+class etkServer:
 
-# create help text and handle some command line arguments
-helptext = "\n\
-\n\
-examples: \n\
-\n\
-"
+    def __init__(self):
+        self.ID = 0
 
-# normal option parsing
-parser = argparse.ArgumentParser( description="a viewer for epic genomic data",
-                                  epilog=helptext,
-                                  formatter_class=argparse.RawDescriptionHelpFormatter )
+    def start(self, structurefile, variable):
+        # -----------------------------------------------------------------------------
+        # VTK pipeline
+        # -----------------------------------------------------------------------------
 
-parser.add_argument( "--version", action="version", version="0.2.0" )
-parser.add_argument( "--path", default=None, required=True )
-parser.add_argument( "--dataroot", default=None )
-parser.add_argument( "--variable", default=None, required=True )
+        renderer = vtkRenderer()
+        renderer.SetBackground(0.5, 0.5, 0.5)
+        renderWindow = vtkRenderWindow()
+        renderWindow.AddRenderer(renderer)
 
-args, remainder = parser.parse_known_args()
+        renderWindowInteractor = vtkRenderWindowInteractor()
+        renderWindowInteractor.SetRenderWindow(renderWindow)
+        renderWindowInteractor.GetInteractorStyle().SetCurrentStyleToTrackballCamera()
 
-structurefile = ""
-if args.dataroot: 
-    structurefile = '/'.join((args.dataroot, args.path))
-else:
-    structurefile = args.path
+        struct = etkStructure()
+        struct.load(structurefile)
+        rep = etkRepresentation()
+        rep.SetStructure(struct)
+        rep.AddToRenderer(renderer)
+        rep.SetColorArray(variable)
 
-# reporting
-print("---------------------------")
-print("Epic View application v0.1")
-print("---------------------------")
+        renderer.ResetCamera()
+
+
+        # -----------------------------------------------------------------------------
+        # Trame
+        # -----------------------------------------------------------------------------
+
+        server = get_server(client_type = "vue2")
+        ctrl = server.controller
+
+        with SinglePageLayout(server) as layout:
+            layout.title.set_text("EPIC.viewer: " + structurefile)
+        
+            with layout.content:
+                with vuetify.VContainer(
+                    fluid=True,
+                    classes="pa-0 fill-height",
+                ):
+                    view = vtk.VtkLocalView(renderWindow)
+
+        server.start()
+
+
 
 #
 # etkStructure 
@@ -216,52 +232,3 @@ class etkRepresentation:
         self.cActor.SetFlyModeToOuterEdges()
 
         renderer.AddActor2D(self.scalar_bar)
-
-
-# -----------------------------------------------------------------------------
-# VTK pipeline
-# -----------------------------------------------------------------------------
-
-renderer = vtkRenderer()
-renderer.SetBackground(0.5, 0.5, 0.5)
-renderWindow = vtkRenderWindow()
-renderWindow.AddRenderer(renderer)
-
-renderWindowInteractor = vtkRenderWindowInteractor()
-renderWindowInteractor.SetRenderWindow(renderWindow)
-renderWindowInteractor.GetInteractorStyle().SetCurrentStyleToTrackballCamera()
-
-struct = etkStructure()
-struct.load(structurefile)
-rep = etkRepresentation()
-rep.SetStructure(struct)
-rep.AddToRenderer(renderer)
-rep.SetColorArray(args.variable)
-
-renderer.ResetCamera()
-
-
-# -----------------------------------------------------------------------------
-# Trame
-# -----------------------------------------------------------------------------
-
-server = get_server(client_type = "vue2")
-ctrl = server.controller
-
-with SinglePageLayout(server) as layout:
-    layout.title.set_text("EPIC.viewer: " + structurefile)
-
-    with layout.content:
-        with vuetify.VContainer(
-            fluid=True,
-            classes="pa-0 fill-height",
-        ):
-            view = vtk.VtkLocalView(renderWindow)
-
-
-# -----------------------------------------------------------------------------
-# Main
-# -----------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    server.start()
