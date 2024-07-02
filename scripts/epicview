@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser( description="a viewer for epic genomic data",
                                   formatter_class=argparse.RawDescriptionHelpFormatter )
 
 parser.add_argument( "--version", action="version", version="0.2.0" )
-parser.add_argument( "session" )
+parser.add_argument( "session", nargs='?' )
 parser.add_argument( "--variable", default=None )
 parser.add_argument( "--example", action='store_true', default=False ) 
 
