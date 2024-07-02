@@ -33,9 +33,9 @@ pip install .
 
 ### examples
 
-Run the application on a session file:
+Run the application on a session file included in the repository:
 ```
-epicview session.yaml
+epicview testing/session.yaml
 ```
 
 Where a session file is the following:
