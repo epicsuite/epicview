@@ -1,10 +1,11 @@
 # compare
 
-A comparative viewer paraview state file for the epic project. 
+A comparative viewer paraview state file for the epic project. When loaded into ParaView 5.13 or later,
+the user can choose two properly defined epic structure files for comparative viewing.
 
 |![screen capture](doc/img/compare.png)|
 | ---- |
-|*Screen capture of the epic compare application*| 
+|*Screen capture of the epic compare state file in ParaView 5.13*| 
 
 ### The EPIC project
 
