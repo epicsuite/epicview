@@ -8,8 +8,6 @@ import yaml
 # create help text and handle some command line arguments
 helptext = "\n\
 \n\
-examples: \n\
-\n\
 "
 
 # normal option parsing
@@ -19,8 +17,8 @@ parser = argparse.ArgumentParser( description="a viewer for epic genomic data",
 
 parser.add_argument( "--version", action="version", version=epicview.__version__ )
 parser.add_argument( "session", nargs='?' )
-parser.add_argument( "--variable", default=None )
-parser.add_argument( "--example", action='store_true', default=False ) 
+parser.add_argument( "--variable", default=None, help='define the variable to be viewed' )
+parser.add_argument( "--example", action='store_true', default=False, help='run the application with example data' ) 
 
 args, remainder = parser.parse_known_args()
 

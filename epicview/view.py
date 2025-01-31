@@ -187,7 +187,7 @@ class etkRepresentation:
         self.sphere = vtkSphereSource()
         self.sphere.SetPhiResolution(10)
         self.sphere.SetThetaResolution(10)
-        self.sphere.SetRadius(0.05)
+        self.sphere.SetRadius(0.00)
         self.sphere.Update()
             # connect glyph to polydata
         self.spheres = vtkGlyph3D()
@@ -216,8 +216,13 @@ class etkRepresentation:
         self.scalar_bar.SetLookupTable(self.sMapper.GetLookupTable())
         self.scalar_bar.SetMaximumHeightInPixels(50)
 
-    def SetRadius(self, radius):
-        self.sphere.SetRadius(radius)
+    def ApplyAttributes(self, **attr):
+        if 'sphere' in attr:
+            if 'radius' in attr['sphere']:
+                self.sphere.SetRadius(attr['sphere']['radius'])
+
+    # def SetRadius(self, radius):
+        # self.sphere.SetRadius(radius)
 
     def SetColorArray(self, name):
         array = self.structure.pd.GetOutput().GetPointData().GetArray(name)
