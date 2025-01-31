@@ -2,6 +2,10 @@
 
 A comparative viewer paraview state file for the epic project. 
 
+|![screen capture](doc/img/compare.png)|
+| ---- |
+|*Screen capture of the epic compare application*| 
+
 ### The EPIC project
 
 Broad knowledge of epigenetic regulation of host-pathogen interactions would greatly advance
