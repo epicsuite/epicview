@@ -7,7 +7,10 @@ the user can choose two properly defined epic structure files for comparative vi
 | ---- |
 |*Screen capture of the epic comparison script running in ParaView 5.13*| 
 
-# how to use this application
+# How to use this application
+
+The application requires two paraview `vtp` files, constructed according to the EPIC compare
+specification.
 
 - Install Paraview v5.13
 
