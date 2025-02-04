@@ -5,7 +5,7 @@ the user can choose two properly defined epic structure files for comparative vi
 
 |![screen capture](doc/img/compare.png)|
 | ---- |
-|*Screen capture of the epic compare state file in ParaView 5.13*| 
+|*Screen capture of the epic comparison script running in ParaView 5.13*| 
 
 # how to use this application
 
