@@ -31,6 +31,7 @@ specification.
         --venv myenv \
         --force-offscreen-rendering \
         ./compare.py \
+        --port 1234 \
         --leftfile /path/to/file.vtp \
         --rightfile /path/to/file.vtp \ 
         --plugindir /path/to/paraview/plugins

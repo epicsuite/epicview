@@ -8,18 +8,25 @@ from paraview.simple import *
 #### disable automatic camera reset on 'Show'
 paraview.simple._DisableFirstRenderCameraReset()
 
-import argparse 
+# for now, explicitly grab values from the command line
+import sys
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--leftfile', type=str)
-parser.add_argument('--rightfile', type=str)
-parser.add_argument('--plugindir', type=str)
-args = parser.parse_args()
+args_leftfile = ''
+args_rightfile = ''
+args_plugindir = ''
+if '--leftfile' in sys.argv:
+    ind = sys.argv.index('--leftfile')
+    args_leftfile = sys.argv[ind+1]
+if '--rightfile' in sys.argv:
+    ind = sys.argv.index('--rightfile')
+    args_rightfile = sys.argv[ind+1]
+if '--plugindir' in sys.argv:
+    ind = sys.argv.index('--plugindir')
+    args_plugindir = sys.argv[ind+1]
 
-
-LoadPlugin(args.plugindir + "/TopologyToolKit/TopologyToolKit.so", ns=globals())
-mockvtpFilename  = args.leftfile
-a229EvtpFilename = args.rightfile 
+LoadPlugin(args_plugindir + "/TopologyToolKit/TopologyToolKit.so", ns=globals())
+mockvtpFilename  = args_leftfile
+a229EvtpFilename = args_rightfile 
 
 # ----------------------------------------------------------------
 # setup views used in the visualization
