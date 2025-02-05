@@ -33,6 +33,5 @@ specification.
         ./compare.py \
         --port 1234 \
         --leftfile /path/to/file.vtp \
-        --rightfile /path/to/file.vtp \ 
-        --plugindir /path/to/paraview/plugins
+        --rightfile /path/to/file.vtp
 ```
