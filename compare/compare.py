@@ -15,10 +15,14 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--leftfile', type=str)
 parser.add_argument('--rightfile', type=str)
-parser.add_argument('--plugindir', type=str)
 namespace, extra = parser.parse_known_args()
 
-LoadPlugin(namespace.plugindir + "/TopologyToolKit/TopologyToolKit.so", ns=globals())
+# find the plugindir from the path
+import sys
+index = sys.executable.index('Contents') + len('Contents')
+prefix = sys.executable[:index]
+
+LoadPlugin(prefix + "/Plugins/TopologyToolKit/TopologyToolKit.so", ns=globals())
 mockvtpFilename  = namespace.leftfile
 a229EvtpFilename = namespace.rightfile
 
