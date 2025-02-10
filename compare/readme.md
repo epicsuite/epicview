@@ -33,5 +33,7 @@ specification.
         ./compare.py \
         --port 1234 \
         --leftfile /path/to/file.vtp \
-        --rightfile /path/to/file.vtp
+        --rightfile /path/to/file.vtp \
+        --leftlabel 'Descriptive Text' \
+        --rightlabel 'Descriptive Text'
 ```

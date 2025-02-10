@@ -11,8 +11,10 @@ paraview.simple._DisableFirstRenderCameraReset()
 # grab additional command line arguments 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--leftfile', type=str)
-parser.add_argument('--rightfile', type=str)
+parser.add_argument('--leftfile',   type=str, default='', required=True)
+parser.add_argument('--rightfile',  type=str, default='', required=True)
+parser.add_argument('--leftlabel',  type=str, default='', required=True)
+parser.add_argument('--rightlabel', type=str, default='', required=True)
 namespace, extra = parser.parse_known_args()
 
 # find the plugindir from the path
@@ -54,6 +56,14 @@ renderView2.BackEnd = 'OSPRay raycaster'
 renderView2.AdditionalLights = light1
 renderView2.OSPRayMaterialLibrary = materialLibrary1
 
+# view label
+viewLabel2 = Text(registrationName='LeftLabel')
+viewLabel2.Text = namespace.leftlabel
+viewLabel2Display = Show(viewLabel2, renderView2, 'TextSourceRepresentation')
+viewLabel2Display.Color = [0.0, 0.0, 0.0]
+viewLabel2Display.FontSize = 24
+viewLabel2Display.Bold = 1
+
 # Create a new 'Light'
 light2 = CreateLight()
 light2.Intensity = 0.0
@@ -76,6 +86,14 @@ renderView3.PolarGrid = 'Polar Grid Actor'
 renderView3.BackEnd = 'OSPRay raycaster'
 renderView3.AdditionalLights = light2
 renderView3.OSPRayMaterialLibrary = materialLibrary1
+
+# view label
+viewLabel3 = Text(registrationName='RightLabel')
+viewLabel3.Text = namespace.rightlabel
+viewLabel3Display = Show(viewLabel3, renderView3, 'TextSourceRepresentation')
+viewLabel3Display.Color = [0.0, 0.0, 0.0]
+viewLabel3Display.FontSize = 24
+viewLabel3Display.Bold = 1
 
 SetActiveView(None)
 
