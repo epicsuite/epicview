@@ -8,9 +8,7 @@ from paraview.simple import *
 #### disable automatic camera reset on 'Show'
 paraview.simple._DisableFirstRenderCameraReset()
 
-# for now, explicitly grab values from the command line
-import sys
-
+# grab additional command line arguments 
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--leftfile', type=str)
