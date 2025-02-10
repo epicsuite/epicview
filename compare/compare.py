@@ -11,10 +11,10 @@ paraview.simple._DisableFirstRenderCameraReset()
 # grab additional command line arguments 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--leftfile',   type=str, default='', required=True)
-parser.add_argument('--rightfile',  type=str, default='', required=True)
-parser.add_argument('--leftlabel',  type=str, default='', required=True)
-parser.add_argument('--rightlabel', type=str, default='', required=True)
+parser.add_argument('--leftfile',   type=str, default='', required=True,  help='.vtp file to load in left view')
+parser.add_argument('--rightfile',  type=str, default='', required=True,  help='.vtp file to load in right view')
+parser.add_argument('--leftlabel',  type=str, default='', required=False, help='label for left view')
+parser.add_argument('--rightlabel', type=str, default='', required=False, help='label for right view')
 namespace, extra = parser.parse_known_args()
 
 # find the plugindir from the path
