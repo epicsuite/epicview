@@ -16,13 +16,13 @@ namespace, extra = parser.parse_known_args()
 
 import yaml
 # load the session file
-sessionData = None
+session = None
 with open(namespace.session) as stream:
     try:
-        sessionData = yaml.load(stream, Loader = yaml.CLoader)
+        session = yaml.load(stream, Loader = yaml.CLoader)
     except yaml.YAMLError as exc:
         print(exc)
-session = sessionData['datasets']
+sessionData = session['datasets']
 
 # set application prefix dir 
 import sys
@@ -43,9 +43,14 @@ with open(scriptprefix + "/settings.yaml") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
+def getLabel(s, i):
+    sd = s['datasets']
+
+    return s['session']['name'] + " Chr" + str(sd['chromosome']) + " " + sd[i]['test'] + " " + str(sd['timevalues'][0]) + sd['timeunits']
+
 # set application values
-mockvtpFilename  = session[0]['file']
-a229EvtpFilename = session[1]['file']
+mockvtpFilename  = sessionData[0]['files'][0]
+a229EvtpFilename = sessionData[1]['files'][0]
 
 # ----------------------------------------------------------------
 # setup views used in the visualization
@@ -79,7 +84,7 @@ renderView2.OSPRayMaterialLibrary = materialLibrary1
 
 # view label
 viewLabel2 = Text(registrationName='LeftLabel')
-viewLabel2.Text = sessionData['session']['name'] + " Chr" + str(session[0]['chromosome']) + " " + session[0]['test'] 
+viewLabel2.Text = getLabel(session, 0) 
 viewLabel2Display = Show(viewLabel2, renderView2, 'TextSourceRepresentation')
 viewLabel2Display.Color =    settings['view']['label']['color'] 
 viewLabel2Display.FontSize = settings['view']['label']['fontsize']
@@ -110,7 +115,7 @@ renderView3.OSPRayMaterialLibrary = materialLibrary1
 
 # view label
 viewLabel3 = Text(registrationName='RightLabel')
-viewLabel3.Text = sessionData['session']['name'] + " Chr" + str(session[1]['chromosome']) + " " + session[1]['test']
+viewLabel3.Text = getLabel(session, 1) 
 viewLabel3Display = Show(viewLabel3, renderView3, 'TextSourceRepresentation')
 viewLabel3Display.Color =    settings['view']['label']['color'] 
 viewLabel3Display.FontSize = settings['view']['label']['fontsize']

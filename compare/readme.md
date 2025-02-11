@@ -38,17 +38,18 @@ Where a `session` file is a yaml file with the following structure:
 ```
 session:
   name: Some Name
+  chromosome: 10
+  timevalues: [48]
+  timeunits: hr
 datasets:
   0:
-    file: /path/to/some.vtp
     test: some name
-    chromosome: 10
-    time: 48
+    files: 
+      - /path/to/some.vtp
   1:
-    file: /path/to/some.vtp
     test: some name
-    chromosome: 10
-    time: 48
+    files: 
+      - /path/to/some.vtp
 ```
 
 This requires a `settings.yaml` file located in the same directory as the script.
