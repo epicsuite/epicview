@@ -32,9 +32,9 @@ specification.
         --force-offscreen-rendering \
         ./compare.py \
         --port 1234 \
-        --esession file.yaml
+        --session file.yaml
 ```
-Where an `esession` file is a yaml file with the following structure:
+Where a `session` file is a yaml file with the following structure:
 ```
 datasets:
   0:
@@ -44,9 +44,6 @@ datasets:
     time: 48
     label: 
       text: 'Chr 10 48hrs'
-      fontsize: 24
-      color: [0, 0, 0]
-      bold: False
   1:
     file: /path/to/some.vtp
     chromosome: chr10
@@ -54,7 +51,14 @@ datasets:
     time: 48
     label: 
       text: 'Chr 10 48hrs' 
-      fontsize: 24
-      color: [0, 0, 0]
-      bold: False
+```
+
+This requires a `settings.yaml` file located in the same directory as the script.
+The settings file has the following contents (values for each can be changed):
+```
+view:
+  label: 
+    fontsize: 24
+    color: [0, 0, 0]
+    bold: True
 ```

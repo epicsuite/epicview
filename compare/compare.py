@@ -11,26 +11,39 @@ paraview.simple._DisableFirstRenderCameraReset()
 # grab additional command line arguments 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--esession',   type=str, default='', required=True,  help='session file to load')
+parser.add_argument('--session',   type=str, default='', required=True,  help='session file to load')
 namespace, extra = parser.parse_known_args()
 
-# load the session file
 import yaml
-
+# load the session file
 sessionData = None
-with open(namespace.esession) as stream:
+with open(namespace.session) as stream:
     try:
         sessionData = yaml.load(stream, Loader = yaml.CLoader)
     except yaml.YAMLError as exc:
         print(exc)
-
 session = sessionData['datasets']
-# find the plugindir from the path
+
+# set application prefix dir 
 import sys
 index = sys.executable.index('Contents') + len('Contents')
-prefix = sys.executable[:index]
+appprefix = sys.executable[:index]
 
-LoadPlugin(prefix + "/Plugins/TopologyToolKit/TopologyToolKit.so", ns=globals())
+# load plugins
+LoadPlugin(appprefix + "/Plugins/TopologyToolKit/TopologyToolKit.so", ns=globals())
+
+# set script prefix dir 
+import os
+scriptprefix = os.path.dirname(sys.argv[0])
+# get settings
+settings = None
+with open(scriptprefix + "/settings.yaml") as stream:
+    try:
+        settings = yaml.load(stream, Loader = yaml.CLoader)
+    except yaml.YAMLError as exc:
+        print(exc)
+
+# set application values
 mockvtpFilename  = session[0]['file']
 a229EvtpFilename = session[1]['file']
 
@@ -68,9 +81,9 @@ renderView2.OSPRayMaterialLibrary = materialLibrary1
 viewLabel2 = Text(registrationName='LeftLabel')
 viewLabel2.Text = session[0]['label']['text']
 viewLabel2Display = Show(viewLabel2, renderView2, 'TextSourceRepresentation')
-viewLabel2Display.Color = session[0]['label']['color']
-viewLabel2Display.FontSize = session[0]['label']['fontsize']
-viewLabel2Display.Bold = session[0]['label']['bold']
+viewLabel2Display.Color =    settings['view']['label']['color'] 
+viewLabel2Display.FontSize = settings['view']['label']['fontsize']
+viewLabel2Display.Bold =     settings['view']['label']['bold']
 
 # Create a new 'Light'
 light2 = CreateLight()
@@ -99,9 +112,9 @@ renderView3.OSPRayMaterialLibrary = materialLibrary1
 viewLabel3 = Text(registrationName='RightLabel')
 viewLabel3.Text = session[1]['label']['text']
 viewLabel3Display = Show(viewLabel3, renderView3, 'TextSourceRepresentation')
-viewLabel3Display.Color = session[1]['label']['color']
-viewLabel3Display.FontSize = session[1]['label']['fontsize']
-viewLabel3Display.Bold = session[1]['label']['bold']
+viewLabel3Display.Color =    settings['view']['label']['color'] 
+viewLabel3Display.FontSize = settings['view']['label']['fontsize']
+viewLabel3Display.Bold =     settings['view']['label']['bold']
 
 SetActiveView(None)
 
