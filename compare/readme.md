@@ -38,22 +38,22 @@ Where an `esession` file is a yaml file with the following structure:
 ```
 datasets:
   0:
-    file: /Users/dhr/Desktop/trame/compare/chr10_100000_48_mock.vtp
+    file: /path/to/some.vtp
     chromosome: chr10
     resolution: 100000
     time: 48
     label: 
-      text: 'Chr 10 mock 48hrs'
+      text: 'Chr 10 48hrs'
       fontsize: 24
       color: [0, 0, 0]
       bold: False
   1:
-    file: /Users/dhr/Desktop/trame/compare/chr10_100000_48_229E.vtp
+    file: /path/to/some.vtp
     chromosome: chr10
     resolution: 100000
     time: 48
     label: 
-      text: 'Chr 10 229E 48hrs' 
+      text: 'Chr 10 48hrs' 
       fontsize: 24
       color: [0, 0, 0]
       bold: False
