@@ -86,9 +86,10 @@ renderView2.OSPRayMaterialLibrary = materialLibrary1
 viewLabel2 = Text(registrationName='LeftLabel')
 viewLabel2.Text = getLabel(session, 0) 
 viewLabel2Display = Show(viewLabel2, renderView2, 'TextSourceRepresentation')
-viewLabel2Display.Color =    settings['view']['label']['color'] 
+viewLabel2Display.Color = settings['view']['label']['color'] 
 viewLabel2Display.FontSize = settings['view']['label']['fontsize']
-viewLabel2Display.Bold =     settings['view']['label']['bold']
+viewLabel2Display.Bold = settings['view']['label']['bold']
+viewLabel2Display.WindowLocation = settings['view']['label']['location']
 
 # Create a new 'Light'
 light2 = CreateLight()
@@ -117,9 +118,10 @@ renderView3.OSPRayMaterialLibrary = materialLibrary1
 viewLabel3 = Text(registrationName='RightLabel')
 viewLabel3.Text = getLabel(session, 1) 
 viewLabel3Display = Show(viewLabel3, renderView3, 'TextSourceRepresentation')
-viewLabel3Display.Color =    settings['view']['label']['color'] 
+viewLabel3Display.Color = settings['view']['label']['color'] 
 viewLabel3Display.FontSize = settings['view']['label']['fontsize']
-viewLabel3Display.Bold =     settings['view']['label']['bold']
+viewLabel3Display.Bold = settings['view']['label']['bold']
+viewLabel3Display.WindowLocation = settings['view']['label']['location']
 
 SetActiveView(None)
 

@@ -60,4 +60,5 @@ view:
     fontsize: 24
     color: [0, 0, 0]
     bold: True
+    location: Upper Left Corner
 ```
