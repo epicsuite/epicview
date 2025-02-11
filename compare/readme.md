@@ -43,13 +43,11 @@ datasets:
     file: /path/to/some.vtp
     test: some name
     chromosome: 10
-    resolution: 100000
     time: 48
   1:
     file: /path/to/some.vtp
     test: some name
     chromosome: 10
-    resolution: 100000
     time: 48
 ```
 
