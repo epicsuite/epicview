@@ -79,7 +79,7 @@ renderView2.OSPRayMaterialLibrary = materialLibrary1
 
 # view label
 viewLabel2 = Text(registrationName='LeftLabel')
-viewLabel2.Text = session[0]['label']
+viewLabel2.Text = sessionData['session']['name'] + " Chr" + str(session[0]['chromosome']) + " " + session[0]['test'] 
 viewLabel2Display = Show(viewLabel2, renderView2, 'TextSourceRepresentation')
 viewLabel2Display.Color =    settings['view']['label']['color'] 
 viewLabel2Display.FontSize = settings['view']['label']['fontsize']
@@ -110,7 +110,7 @@ renderView3.OSPRayMaterialLibrary = materialLibrary1
 
 # view label
 viewLabel3 = Text(registrationName='RightLabel')
-viewLabel3.Text = session[1]['label']
+viewLabel3.Text = sessionData['session']['name'] + " Chr" + str(session[1]['chromosome']) + " " + session[1]['test']
 viewLabel3Display = Show(viewLabel3, renderView3, 'TextSourceRepresentation')
 viewLabel3Display.Color =    settings['view']['label']['color'] 
 viewLabel3Display.FontSize = settings['view']['label']['fontsize']
