@@ -42,15 +42,13 @@ datasets:
     chromosome: chr10
     resolution: 100000
     time: 48
-    label: 
-      text: 'Chr 10 48hrs'
+    label: 'Chr 10 48hrs'
   1:
     file: /path/to/some.vtp
     chromosome: chr10
     resolution: 100000
     time: 48
-    label: 
-      text: 'Chr 10 48hrs' 
+    label: 'Chr 10 48hrs' 
 ```
 
 This requires a `settings.yaml` file located in the same directory as the script.
