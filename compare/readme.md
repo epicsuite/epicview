@@ -32,8 +32,29 @@ specification.
         --force-offscreen-rendering \
         ./compare.py \
         --port 1234 \
-        --leftfile /path/to/file.vtp \
-        --rightfile /path/to/file.vtp \
-        --leftlabel 'Descriptive Text' \
-        --rightlabel 'Descriptive Text'
+        --esession file.yaml
+```
+Where an `esession` file is a yaml file with the following structure:
+```
+datasets:
+  0:
+    file: /Users/dhr/Desktop/trame/compare/chr10_100000_48_mock.vtp
+    chromosome: chr10
+    resolution: 100000
+    time: 48
+    label: 
+      text: 'Chr 10 mock 48hrs'
+      fontsize: 24
+      color: [0, 0, 0]
+      bold: False
+  1:
+    file: /Users/dhr/Desktop/trame/compare/chr10_100000_48_229E.vtp
+    chromosome: chr10
+    resolution: 100000
+    time: 48
+    label: 
+      text: 'Chr 10 229E 48hrs' 
+      fontsize: 24
+      color: [0, 0, 0]
+      bold: False
 ```
