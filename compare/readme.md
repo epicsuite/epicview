@@ -36,19 +36,21 @@ specification.
 ```
 Where a `session` file is a yaml file with the following structure:
 ```
+session:
+  name: Some Name
 datasets:
   0:
     file: /path/to/some.vtp
-    chromosome: chr10
+    test: some name
+    chromosome: 10
     resolution: 100000
     time: 48
-    label: 'Chr 10 test'
   1:
     file: /path/to/some.vtp
-    chromosome: chr10
+    test: some name
+    chromosome: 10
     resolution: 100000
     time: 48
-    label: 'Chr 10 altered' 
 ```
 
 This requires a `settings.yaml` file located in the same directory as the script.
