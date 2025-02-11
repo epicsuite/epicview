@@ -43,14 +43,17 @@ with open(scriptprefix + "/settings.yaml") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-def getLabel(s, i):
+def getLabel(s, i, timeID):
     sd = s['datasets']
 
-    return s['session']['name'] + " Chr" + str(sd['chromosome']) + " " + sd[i]['test'] + " " + str(sd['timevalues'][0]) + sd['timeunits']
+    return s['session']['name'] + " Chr" + str(sd['chromosome']) + " " + sd[i]['test'] + " " + str(sd['timevalues'][timeID]) + sd['timeunits']
+
+# manage time
+timeID = 0
 
 # set application values
-mockvtpFilename  = sessionData[0]['files'][0]
-a229EvtpFilename = sessionData[1]['files'][0]
+mockvtpFilename  = sessionData[0]['files'][timeID]
+a229EvtpFilename = sessionData[1]['files'][timeID]
 
 # ----------------------------------------------------------------
 # setup views used in the visualization
@@ -84,7 +87,7 @@ renderView2.OSPRayMaterialLibrary = materialLibrary1
 
 # view label
 viewLabel2 = Text(registrationName='LeftLabel')
-viewLabel2.Text = getLabel(session, 0) 
+viewLabel2.Text = getLabel(session, 0, timeID) 
 viewLabel2Display = Show(viewLabel2, renderView2, 'TextSourceRepresentation')
 viewLabel2Display.Color = settings['view']['label']['color'] 
 viewLabel2Display.FontSize = settings['view']['label']['fontsize']
@@ -116,7 +119,7 @@ renderView3.OSPRayMaterialLibrary = materialLibrary1
 
 # view label
 viewLabel3 = Text(registrationName='RightLabel')
-viewLabel3.Text = getLabel(session, 1) 
+viewLabel3.Text = getLabel(session, 1, timeID) 
 viewLabel3Display = Show(viewLabel3, renderView3, 'TextSourceRepresentation')
 viewLabel3Display.Color = settings['view']['label']['color'] 
 viewLabel3Display.FontSize = settings['view']['label']['fontsize']
